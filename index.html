@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bugs</title>
+    <link rel="stylesheet" href="bootstrap.min.css" type="text/css"/>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="container" v-cloak>
+    <div>
+        <h4>Are you ready to fixs all the bugs?</h4>
+        <p>Commits: {{ count }}</p>
+        <button class="btn btn-danger"
+                @click="status = 0">
+            Give up!
+        </button>
+    </div>
+
+    <hr>
+
+    <div v-for="bug in bugs" class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input"
+               :id="'bug' + bug.id"
+               v-model:checked="bug.fixed"
+               :disabled="bug.disabled"
+               @click="update(bug)">
+        <label class="custom-control-label"
+               :for="'bug' + bug.id">
+            Bug #{{ bug.id + 1}}
+        </label>
+    </div>
+
+    <hr>
+
+    <div v-if="done">
+        <p>You`ve done that!</p>
+        <button class="btn btn-success"
+                @click="refresh">
+            Refresh
+        </button>
+    </div>
+</div>
+
+<script src="vue.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
