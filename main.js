@@ -20,8 +20,9 @@ new Vue({
     methods: {
         update(bug) {
             this.count++;
-            let mask = bug.fixed ? ~(1 << bug.id) & ((1 << this.bugs.length) - 1) : ((1 << this.bugs.length) - 1);
-            this.status = Math.round(Math.random() * (1 << this.bugs.length)) & mask;
+            let mask = bug.fixed ? ~(1 << bug.id) & ((1 << this.bugs.length) - 1) : (1 << bug.id);
+            let rand = Math.round(Math.random() * (1 << this.bugs.length));
+            this.status = bug.fixed ? rand & mask : rand | mask;
             for (let i = 0; i < this.bugs.length; i++) {
                 this.bugs[i].fixed = (1 << i) & this.status;
             }
